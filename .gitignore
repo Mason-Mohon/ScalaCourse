@@ -1,0 +1,21 @@
+# SBT build artifacts
+/target/
+/project/target/
+/project/project/
+
+# VS Code settings
+.vscode/
+
+# Metals & Bloop (VS Code + Scala tooling)
+/.metals/
+/.bloop/
+/.worksheet/
+/.antlr/
+/.cache/
+
+# Logs
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
