@@ -37,4 +37,67 @@ class Person(name: String, val age: Int = 0) {// This is a constructor, which me
     def this(name: String) = this(name, 0) // Auxillary constructor. 
     // The implementation of an auxillary constructor has to be another constructor and nothing else.
     def this() = this("John Doe") // These are not very useful, only for default parameters. But we can just describe the default parameter from the get-go.
+
+    val counter = new Counter
+    counter.inc.print
+}
+
+/* 
+Exercise: Implement a Novel and Writer Class
+
+The Writer should have a first name, surname, and birth year.
+    - A method called full name which returns the concatenation of first name and surname.
+
+The novel should have a name and a year of release, as well as an author, which is an instance of type writer. Should have methods:
+    - Author age, returns age of author at year of release.
+    - isWrittenBy (an author)
+    - Copy, which receives a new year of release and returns a new instance of novel with a new year of release.
+*/
+
+class Writer(firstName: String, surname: String, val birthYear: Int) {
+
+    def fullName: String = s"$firstName $surname"
+}
+
+class Novel(title: String, releaseYear: Int, author: Writer) {
+
+    def authorAge = releaseYear - author.birthYear
+
+    def isWrittenBy(author: Writer) = author == this.author
+
+    def copy(newYear: Int): Novel = new Novel(title, newYear, author)
+}
+
+/*  
+    Counter class
+        - receives an int value
+        - method current count
+        - method to increment/decrement => new Counter
+        - overload inc/dec to receive an amount
+*/
+
+class Counter(val num: Int = 1) {
+
+    def currentCount = num
+
+    def inc = {
+        println("incrementing")
+        new Counter(num + 1) // Instances are immutable so this much create a new instance
+    }
+    def dec = {
+        println("decrementing")
+        new Counter(num - 1)
+    }
+
+    def inc(n: Int): Counter = {
+        if (n <= 0) this
+        else inc.inc(n+1)
+    }
+
+    def dec(n: Int): Counter = {
+        if (n <= 0) this
+        else dec.dec(n-1)
+    }
+
+    def print = println(currentCount)
 }
