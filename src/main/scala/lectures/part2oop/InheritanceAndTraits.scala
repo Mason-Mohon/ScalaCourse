@@ -32,9 +32,28 @@ object InheritanceAndTraits extends App {
 
     // Overriding
     class Dog(override val creatureType: String) extends Animal { // values can also be overwritten in the constructor.
-        override def eatAgain = println("crunch crunch") // Overriding works for methods.
+        override def eatAgain = {
+            super.eatAgain // This will call the version of the method from the parent class.
+            println("crunch crunch") // Overriding works for methods.
+        }
         // override val creatureType: String = "Domestic" This overrides the creature type in the original animal class
     }
+    // class Dog(dogType: String) extends Animal {
+    //     override val creatureType: String = dogType
+    // }
     val dog = new Dog("Domestic") // Overrider works right here.
     dog.eatAgain
+
+    // Type subsitution. In a broad sense, this is called polymorphism.
+    val unknownAnimal: Animal = new Dog("K9")
+    unknownAnimal.eat // A method call will always go to the most overridden version whenever possible.
+
+    // overRIDING vs. overLOADING.
+    // Overriding means supplying a different implementation in derived classes. 
+    // Overloading is providing multiple methods with different signatures, but the same name in the same class.
+
+    // Preventing overrides.
+    // 1 - Use the keyword "final" - prevents derived classes from overriding the method. Ex: "final def ..."
+    // 2 - Use final on the class itself. Ex: "final class ..." Numerical classes, string types, are final.
+    // 3 - Seal the class. This lets you extend classes in the same file only, but prevents extension in other files. This is used for being exhaustive in type hierarchies. Ex: "sealed class ..."
 }
