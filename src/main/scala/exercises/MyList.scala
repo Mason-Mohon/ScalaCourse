@@ -181,4 +181,11 @@ object ListTest extends App {
     println(listOfIntegers.sort((x, y) => y - x))
     // println(anotherListOfIntegers.zipWith[String, String](listOfStrings, _ + "-" + _)) // Example had string concatenation but that was deprecated. And I cannot get this one to work.
     println(listOfIntegers.fold(0)(_ + _)) // Also known as reducing, and fold is one of the forms that reducing can take.
+
+    // for comprehensions
+    val combinations = for {
+        n <- listOfIntegers
+        string <- listOfStrings
+    } yield s"$n-$string"
+    println(combinations)
 }
